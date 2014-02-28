@@ -1,0 +1,11 @@
+%% -*- erlang -*-
+{application, yawndb,
+ [{description, "An in-memory circular array database written in Erlang"},
+  {vsn, "1.0"},
+  {modules, []},
+  {registered, []},
+  {mod, {'yawndb', []}},
+  {env, []},
+  {applications, [kernel, stdlib, sasl, lager,
+                  cowboy, gproc
+                 ]}]}.

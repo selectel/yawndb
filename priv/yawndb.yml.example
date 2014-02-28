@@ -1,0 +1,136 @@
+yawndb: 
+    # Flush-related settings: this group of settings regulates
+    # a process of flushing data from memory to disc
+    flush_enabled: true
+    flush_dir: "./priv/data"
+    flush_period: 60 # in seconds
+
+    # This option controls how long it's ok to actually dump data
+    # as a fraction of flush period. If an actual time exceed this
+    # one, warning will be issued
+    flush_late_threshold: 0.8
+    # Read cache size
+    flush_cache: 134217728 # 128mb
+    # Write buffer size
+    flush_write_buffer: 16777216 # 16mb
+    # Size of blocks that will be written to disk
+    flush_block_size: 262144 # 256kb
+
+    # Cleanup-related settings: this group of settings regulates
+    # a process of removing obsolete conveyors from paths
+    cleanup_enabled: true
+    cleanup_period: 300 # in seconds
+
+    # Admin JSON-API options
+    listen_admin_jsonapi_reqs: true
+    admin_jsonapi_iface: "127.0.0.1"
+    admin_jsonapi_port: 8082
+    # Number of prespawned threads. 100 is ok
+    admin_jsonapi_prespawned: 3
+
+    # User JSON-API options
+    listen_jsonapi_reqs: true
+    jsonapi_iface: "127.0.0.1"
+    jsonapi_port: 8081
+    # Number of prespawned threads. 100 is ok
+    jsonapi_prespawned: 30
+
+    # TCP API options (for write requests)
+    listen_tcpapi_reqs: true
+    tcpapi_iface: "127.0.0.1" # note: commas, not dots
+    tcpapi_port: 2011
+    # Number of prespawned threads. 100 is ok
+    tcpapi_prespawned: 10
+
+    # Size of maximum slice that can be requested
+    max_slice: 100000
+
+    # Rules for paths starts here (you can look for descriptions
+    # of paths stuff in YAWNDB docs)
+    rules:
+        - name: stats_per_min_avg
+          prefix: stats
+          type: avg
+          timeframe: 60
+          limit: 1440
+          split: backward
+          value_size: large # 4096 values per min is enough
+          additional_values: []
+          autoremove: true
+
+        - name: stats_per_hour_avg
+          prefix: stats
+          type: avg
+          timeframe: 3600
+          limit: 720
+          split: backward
+          value_size: large
+          additional_values: []
+            
+        - name: stats_per_day_avg
+          prefix: stats
+          type: avg
+          timeframe: 86400
+          limit: 730
+          split: backward
+          value_size: large
+          additional_values: []
+
+        - name: load_per_min
+          prefix: load
+          type: sum
+          timeframe: 60
+          limit: 1440
+          split: backward
+          value_size: large
+          additional_values: []
+
+        - name: load_per_hour
+          prefix: load
+          type: sum
+          timeframe: 3600
+          limit: 720
+          split: forward
+          value_size: large
+          additional_values: []
+
+        - name: load_per_day
+          prefix: load
+          type: sum
+          timeframe: 86400
+          limit: 730
+          split: proportional
+          value_size: large
+          additional_values: []
+
+        - name: response_last_val
+          prefix: response
+          type: last
+          timeframe: 60
+          limit: 10080
+          split: backward
+          value_size: large
+          additional_values:
+              timeout: weak
+              error: weak
+
+# Logging configuration goes here
+lager:
+    error_logger_redirect: true
+    handlers:
+        - lager_console_backend: info
+        - lager_file_backend:                                            
+              file: "log/error.log"
+              level: error
+              size: 52428800
+              date: "$D0"
+              count: 5
+        - lager_file_backend:
+              file: "log/console.log"
+              level: info
+              size: 52428800
+              date: "$D0"
+              count: 5
+
+sasl:
+    sasl_error_logger: false

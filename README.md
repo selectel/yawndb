@@ -475,8 +475,8 @@ Authors
 -------
 
 YAWNDB was written by [Dmitry Groshev](https://github.com/si14/) in 2012.
-[Alexandre Neganov](https://github.com/ikkeps),
+[Alexander Neganov](https://github.com/ikkeps),
 [Kagami Hiiragi](https://github.com/kagami),
 [Maxim Mitroshin](https://github.com/rocco66),
-[Pavel Abalikhin](https://github.com/tnt-dev) and
-[Fyodor Gogolev](https://github.com/knsd) have also contributed to the project.
+[Pavel Abalihin](https://github.com/tnt-dev) and
+[Fedor Gogolev](https://github.com/knsd) have also contributed to the project.

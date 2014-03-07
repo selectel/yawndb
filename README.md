@@ -283,7 +283,7 @@ Example of an answer:
 	"processes_now": 162836,
 	"processes_max": 300000,
 	"paths_count": 162256,
-	"dirty_paths_count": "19864"
+	"dirty_paths_count": 19864
  }
 }
 ```
@@ -415,7 +415,7 @@ send the packets in the indicated format.  No reply from the server is expected.
 | uint8  | Flag indicating special values (0 - the value is not special) |
 | unit64 | Number of seconds from the beginning of UNIX era              |
 | unit64 | Value (or the number of the special value)                    |
-| byte   | Byte sequence                                                 |
+| byte*  | Byte sequence                                                 |
 
 #### Constructing a packet in Python
 

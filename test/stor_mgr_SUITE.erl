@@ -35,7 +35,7 @@ flushed_when_stop(Conf) ->
     start_yawndb(Conf),
     Path = <<"stats-a-bar">>,
     yawndb_stor_mgr:new_path(Path),
-    {MegaSecs, Secs, _MicroSecs} = erlang:now(),
+    {MegaSecs, Secs, _MicroSecs} = os:timestamp(),
     Now = ?M * MegaSecs + Secs,
     yawndb_stor_mgr:write(Path, Now, {int, 1010}),
     stop_yawndb(),

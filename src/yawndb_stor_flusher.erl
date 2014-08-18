@@ -100,11 +100,11 @@ handle_call(Req, _From, #state{enabled=false}=State) ->
     lager:info("disabled, got req ~p, ignoring", [Req]),
     {reply, ok, State};
 handle_call(prepare_shutdown, _From, #state{bitcask_ref=BitcaskRef}=State) ->
-    Start = erlang:now(),
+    Start = os:timestamp(),
     lager:info("starting dump before shutdown"),
     DirtyPids = get_dirty_pids(),
     dump_all(BitcaskRef, DirtyPids),
-    Diff = timer:now_diff(erlang:now(), Start) / 1000000,
+    Diff = timer:now_diff(os:timestamp(), Start) / 1000000,
     lager:info("dump finished, ~.2f s", [Diff]),
     {reply, done, State#state{shutting_down=true}};
 handle_call(Request, _From, State) ->
@@ -131,11 +131,11 @@ handle_info(Info, #state{enabled=false}=State) ->
     {noreply, State};
 handle_info(start_flush, #state{shutting_down=false,
                                 bitcask_ref=BitcaskRef}=State) ->
-    DumpStarted = erlang:now(),
+    DumpStarted = os:timestamp(),
     lager:info("starting dump"),
     DirtyPids = get_dirty_pids(),
     dump_all(BitcaskRef, DirtyPids),
-    Diff = timer:now_diff(erlang:now(), DumpStarted) / 1000000,
+    Diff = timer:now_diff(os:timestamp(), DumpStarted) / 1000000,
     ToNextFlush = max(State#state.flush_period - Diff * 1000, 0),
     lager:info("dump finished, ~.2f s, next in ~.2f s",
                [Diff, ToNextFlush / 1000]),

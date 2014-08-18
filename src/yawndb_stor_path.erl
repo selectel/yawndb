@@ -544,7 +544,7 @@ is_data_actual(Time,
                                     timeframe=TF}}) when is_integer(Time)->
     case yawndb_utils:get_rule_option(Name, autoremove) of
         true ->
-            {MegaSecs, Secs, _MicroSecs} = erlang:now(),
+            {MegaSecs, Secs, _MicroSecs} = os:timestamp(),
             Now = ?M * MegaSecs + Secs,
             Time + Limit * TF >= Now;
         _ -> true

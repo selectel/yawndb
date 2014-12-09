@@ -1,20 +1,22 @@
 .PHONY: all rel deps test apitest compile
 
+REBAR=rebar
+
 all: deps compile
 
 compile:
-	./rebar compile
+	$(REBAR) compile
 
 deps:
-	./rebar get-deps
+	$(REBAR) get-deps
 
 clean:
-	./rebar clean
+	$(REBAR) clean
 
 test:	mgrtest apitest unittest
 
 unittest:
-	./rebar skip_deps=true eunit
+	$(REBAR) skip_deps=true eunit
 
 mgrtest:
 	./run_ct_for_tc.sh stor_mgr

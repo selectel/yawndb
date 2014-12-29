@@ -46,7 +46,7 @@ yawndb:
     max_slice: 100000
 
     # Rules for paths starts here (you can look for descriptions
-    # of paths stuff in YAWNDB docs)
+    # of paths stuff in README)
     rules:
         - name: stats_per_min_avg
           prefix: stats

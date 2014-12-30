@@ -20,7 +20,7 @@ init([]) ->
                {yawndb_stor_path, start_link, []},
                permanent,
                5000, % try to shutdown gracefully, kill after 5secs.
-               supervisor,
+               worker,
                [yawndb_stor_path]},
     {ok, {{Type, MaxRestarts, MaxSeconds},
           [TypeSup]}}.

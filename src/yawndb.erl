@@ -20,7 +20,7 @@ start() ->
      end || A <- [compiler, syntax_tools, crypto,
                   asn1, public_key, ssl, inets,
                   goldrush, lager, sasl, gproc,
-                  ranch, cowlib, cowboy, yawndb]],
+                  ranch, cowlib, cowboy, yamerl, yawndb]],
     ok.
 
 %% @doc Stop YAWNDB server
@@ -35,11 +35,8 @@ stop() ->
 %% @doc Application start callback for yawndb
 -spec start(atom(), list()) -> {ok, pid()} | {error, any()} | ignore.
 start(_StartType, _Args) ->
-    ConfigFile = get_config_path(),
-    case yaml:load_file(ConfigFile, [implicit_atoms]) of
-        {ok, [Config]} -> load_config(Config);
-        _              -> exit(bad_config)
-    end,
+    [Config] = read_config(get_config_path()),
+    load_config(Config),
     {ok, RawRules} = application:get_env(rules),
     {ok, Rules} = prepare_rules(RawRules),
     ets:new(rules, [bag, named_table, {keypos, #rule.prefix},
@@ -95,6 +92,12 @@ get_config_path() ->
             end
     end.
 
+-spec read_config(string()) -> [any()].
+read_config(Path) ->
+    try yamerl_constr:file(Path, [{node_mods, [yamerl_node_erlang_atom]},
+                                  {erlang_atom_autodetection, true}])
+    catch {yamerl_exception, _} -> exit(bad_config)
+    end.
 
 -spec prepare_rules([{atom(), any()}]) -> [#rule{}].
 prepare_rules(RawRules) ->

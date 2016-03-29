@@ -32,9 +32,6 @@ written via the socket and read via the REST API interface.
 Installation
 ------------
 
- The [libyaml](http://pyyaml.org/wiki/LibYAML) parser
-should be installed on the client machine for working with YAWNDB.
-
 Clone the repository:
 
 ```

@@ -19,7 +19,7 @@ prepare_to_start_yawndb(Config) ->
      end || A <- [compiler, syntax_tools, crypto,
                   asn1, public_key, ssl, inets,
                   goldrush, lager, sasl, gproc,
-                  ranch, cowlib, cowboy]],
+                  ranch, cowlib, yamerl, cowboy]],
     ok.
 
 stop_yawndb() ->

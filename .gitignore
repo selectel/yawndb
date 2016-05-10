@@ -6,4 +6,4 @@ log
 *.beam
 *.plt
 erl_crash.dump
-
+.rebar

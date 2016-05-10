@@ -1,6 +1,8 @@
 YAWNDB
 ======
 
+[![Build Status](https://travis-ci.org/selectel/yawndb.svg?branch=master)](https://travis-ci.org/selectel/yawndb)
+
 YAWNDB is an in-memory circular array database written in Erlang.  This language is
 based upon the lightweight process model allowing to process large amounts of
 data without consuming extra system resources.  In YAWNDB the data are stored

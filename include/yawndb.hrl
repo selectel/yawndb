@@ -18,12 +18,12 @@
 
 -record(conveyor, {circa       :: ecirca:res(),
                    last_ts     :: timestamp(),
-                   num_to_atom :: tuple(atom()),
+                   num_to_atom :: tuple(),
                    rule        :: #rule{}}).
 
 -record(p_conveyor, {circa_bin   :: binary(),
                      last_ts     :: timestamp(),
-                     num_to_atom :: tuple(atom()),
+                     num_to_atom :: tuple(),
                      rule        :: #rule{}}).
 
 -compile([{parse_transform, lager_transform}]).

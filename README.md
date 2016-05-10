@@ -26,9 +26,9 @@ Architecture
 ------------
 
 YAWNDB is based on a circular array algorithm implemented in Ecirca library
-written in C.  YAWNDB modules written in Erlang interact with Ecirca via native
-implemented functions (NIF).  Data retention is provided by Bitcask application
-written in Erlang.  The REST API is based on Cowboy web server.  The data is
+written in C. YAWNDB modules written in Erlang interact with Ecirca via native
+implemented functions (NIF). Data retention is provided by Bitcask application
+written in Erlang. The REST API is based on Cowboy web server. The data is
 written via the socket and read via the REST API interface.
 
 Installation
@@ -64,7 +64,7 @@ or create an appropriate symlink.
 Configuration
 -----------
 
-All YAWNDB settings are kept in the configuration file yawndb.yml.
+All YAWNDB settings are kept in the configuration file `yawndb.yml`.
 
 #### Data Saving Settings
 
@@ -120,30 +120,30 @@ All YAWNDB settings are kept in the configuration file yawndb.yml.
 | limit                | integer | Conveyor size                         |
 | split                | string  | Define the way the value will be divided in case it does not match the bucket: proportional - the value will be proportionally divided between the two nearest buckets; equal - the value will be divided into halves between the two nearest buckets; forward/backward - the whole value wil be put into the previous (or the nearest) bucket |
 | type                 | string  | Define the value to be saved in buckets: last - only the last value will be saved; max - the maximal incoming value will be saved; min - the minimal incoming value will be saved; sum - the sum of the incoming values will be saved; avg - the average value will be saved |
-| value_size           | integer | Define the value size for a bucket (16, 32 и 64 bits), possible values: small, medium, large 
+| value_size           | integer | Define the value size for a bucket (16, 32 и 64 bits), possible values: small, medium, large
 | additional_values    | list    | A list of "foobar: weak/strong" pairs from 0 to 14 symbols in length.  Sometimes it is necessary to save the additional values not being numbers ('timeout', for example).  The list of additional values is used for this purpose.  The values can be either strong or weak.  The weak values are updated if the bucket is updated while the strong values are never updated. |
 | autoremove           | boolean | Enable/disable conveyor removal in case of data deterioration |
 
 Get data API
 ---------------
 
-The data are captured with the HTTP API.  There are two types of API in YAWNDB
-- the administrative API and the user API.  All API settings are specified in
+The data are captured with the HTTP API. There are two types of API in YAWNDB
+- the administrative API and the user API. All API settings are specified in
 the configuration file in the sections Admin JSON API and User JSON API.
 
 A typical API response is given in the following form:
 
 ```json
 {
-	"status": "ok",
-	"code": "ok",
-	"answer": {}
+    "status": "ok",
+    "code": "ok",
+    "answer": {}
 }
 ```
 
 The status field may take the values `ok` or `error`.
 The code field contains "ok" on success.  The answer is displayed in the answer
-field.  If an error occurs, its code will be displayed in the code field; the
+field. If an error occurs, its code will be displayed in the code field; the
 human-readable description of the error will be displayed in the answer field.
 
 #### Get a list of rules for a selected path
@@ -154,9 +154,9 @@ Example of an answer:
 
 ```json
 {
- "status": "ok",
- "code": "ok",
- "answer": ["stat"]
+    "status": "ok",
+    "code": "ok",
+    "answer": ["stat"]
 }
 ```
 
@@ -180,16 +180,16 @@ Example of an answer:
  "status": "ok",
  "code": "ok",
  "answer": [
-	[63555098820, 10, 12],
-	[63555098888, 16, "empty"],
-	[63555098940, 12, 10],
-	[63555099000, 3, 8],
-	[63555099060, 10, 12],
-	[63555099120, 2, 9],
-	[63555099180, 7, 12],
-	[63555099240, 3, 4],
-	[63555099300, 20, 10],
-	[63555099360, 2, 11]
+    [63555098820, 10, 12],
+    [63555098888, 16, "empty"],
+    [63555098940, 12, 10],
+    [63555099000, 3, 8],
+    [63555099060, 10, 12],
+    [63555099120, 2, 9],
+    [63555099180, 7, 12],
+    [63555099240, 3, 4],
+    [63555099300, 20, 10],
+    [63555099360, 2, 11]
  ]
 }
 ```
@@ -212,16 +212,16 @@ Example of an answer:
  "status": "ok",
  "code": "ok",
  "answer": [
-	[63555098820, 12],
-	[63555098880, "empty"],
-	[63555098940, 10],
-	[63555099000, "empty"],
-	[63555099060, 15],
-	[63555099120, "empty"],
-	[63555099180, 12],
-	[63555099240, "empty"],
-	[63555099300, 10],
-	[63555099360, "empty"]
+    [63555098820, 12],
+    [63555098880, "empty"],
+    [63555098940, 10],
+    [63555099000, "empty"],
+    [63555099060, 15],
+    [63555099120, "empty"],
+    [63555099180, 12],
+    [63555099240, "empty"],
+    [63555099300, 10],
+    [63555099360, "empty"]
  ]
 }
 ```
@@ -245,16 +245,16 @@ Example of an answer:
  "status": "ok",
  "code": "ok",
  "answer": [
-	[63555103140, 11],
-	[63555103200, 10],
-	[63555103260, 10],
-	[63555103320, 12],
-	[63555103380, 10],
-	[63555103440, 10],
-	[63555103500, 11],
-	[63555103560, 10],
-	[63555103620, 10],
-	[63555103680, 14]
+    [63555103140, 11],
+    [63555103200, 10],
+    [63555103260, 10],
+    [63555103320, 12],
+    [63555103380, 10],
+    [63555103440, 10],
+    [63555103500, 11],
+    [63555103560, 10],
+    [63555103620, 10],
+    [63555103680, 14]
  ]
 }
 ```
@@ -275,14 +275,14 @@ Example of an answer:
  "status": "ok",
  "code": "ok",
  "answer": {
-	"read_rpm": 37,
-	"write_rpm": 816042,
-	"read_rps": 1,
-	"write_rps": 13601,
-	"processes_now": 162836,
-	"processes_max": 300000,
-	"paths_count": 162256,
-	"dirty_paths_count": 19864
+    "read_rpm": 37,
+    "write_rpm": 816042,
+    "read_rps": 1,
+    "write_rps": 13601,
+    "processes_now": 162836,
+    "processes_max": 300000,
+    "paths_count": 162256,
+    "dirty_paths_count": 19864
  }
 }
 ```
@@ -312,8 +312,8 @@ Example of an answer:
  "status": "ok",
  "code": "ok",
  "answer": [
-	"some-stats-a",
-	"some-stats-b"
+    "some-stats-a",
+    "some-stats-b"
  ]
 }
 ```
@@ -354,16 +354,16 @@ Example of an answer:
  "status": "ok",
  "code": "ok",
  "answer": [
-	[63555096900, 12],
-	[63555096960, "empty"],
-	[63555097020, 10],
-	[63555097080, 16],
-	[63555097140, 10],
-	[63555097200, "empty"],
-	[63555097260, 11],
-	[63555097320, 17],
-	[63555097380,16],
-	[63555097440, "empty"]
+    [63555096900, 12],
+    [63555096960, "empty"],
+    [63555097020, 10],
+    [63555097080, 16],
+    [63555097140, 10],
+    [63555097200, "empty"],
+    [63555097260, 11],
+    [63555097320, 17],
+    [63555097380,16],
+    [63555097440, "empty"]
  ]
 }
 ```
@@ -392,9 +392,9 @@ Example of an answer:
 Save data API
 ---------
 
-This API is used for saving new data to YAWNDB.  To save the data connect to
+This API is used for saving new data to YAWNDB. To save the data connect to
 the TCP port indicated in the configuration file (TCP API options section) and
-send the packets in the indicated format.  No reply from the server is expected.
+send the packets in the indicated format. No reply from the server is expected.
 
 #### The main types of data used
 
@@ -442,31 +442,31 @@ def encode_yawndb_packet(is_special, path, time, value):
 
 // describe the packet structure
 struct yawndb_packet_struct {
-	uint16_t	length;
-	uint8_t 	version;
-	int8_t  	isSpecial;
-	uint64_t	timestamp;
-	uint64_t	value;
-	char    	path[];
+    uint16_t    length;
+    uint8_t     version;
+    int8_t      isSpecial;
+    uint64_t    timestamp;
+    uint64_t    value;
+    char        path[];
 };
 
 // construct the packet
 yawndb_packet_struct *encode_yawndb_packet(int8_t isSpecial,
-	uint64_t timestamp, uint64_t value, const char * path)
+    uint64_t timestamp, uint64_t value, const char * path)
 {
-	yawndb_packet_struct *packet;
-	uint16_t length;
+    yawndb_packet_struct *packet;
+    uint16_t length;
 
-	length = sizeof(uint8_t) + sizeof(int8_t) + sizeof(uint64_t) + sizeof(uint64_t) + strlen(path);
-	packet = malloc(length + sizeof(uint16_t));
-	packet->length = htobe16(length);
-	packet->version = YAWNDB_PROTOCOL_VERSION;
-	packet->isSpecial = isSpecial;
-	packet->timestamp = htobe64(timestamp);
-	packet->value = htobe64(value);
-	strncpy(packet->path, path, strlen(path));
+    length = sizeof(uint8_t) + sizeof(int8_t) + sizeof(uint64_t) + sizeof(uint64_t) + strlen(path);
+    packet = malloc(length + sizeof(uint16_t));
+    packet->length = htobe16(length);
+    packet->version = YAWNDB_PROTOCOL_VERSION;
+    packet->isSpecial = isSpecial;
+    packet->timestamp = htobe64(timestamp);
+    packet->value = htobe64(value);
+    strncpy(packet->path, path, strlen(path));
 
-	return packet;
+    return packet;
 }
 ```
 
@@ -477,5 +477,5 @@ YAWNDB was written by [Dmitry Groshev](https://github.com/si14/) in 2012.
 [Alexander Neganov](https://github.com/ikkeps),
 [Kagami Hiiragi](https://github.com/kagami),
 [Maxim Mitroshin](https://github.com/rocco66),
-[Pavel Abalihin](https://github.com/tnt-dev) and
+[Pavel Abalikhin](https://github.com/tnt-dev) and
 [Fedor Gogolev](https://github.com/knsd) have also contributed to the project.

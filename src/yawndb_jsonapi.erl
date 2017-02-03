@@ -279,8 +279,9 @@ is_bin({_, Error}) -> throw({error, Error}).
 
 -spec to_int({binary(), atom()}) -> {integer(), atom()}.
 to_int({ValBin, Error}) ->
-    try {binary_to_int(ValBin), Error}
-    catch error:badarg -> throw({error, Error})
+    case catch {binary_to_int(ValBin), Error} of
+        {Val, _}=Res when Val >= 0 -> Res;
+        _                          -> throw({error, Error})
     end.
 
 -spec check(fun((...) -> boolean()),
